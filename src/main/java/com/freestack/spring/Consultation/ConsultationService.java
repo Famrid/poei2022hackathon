@@ -1,42 +1,49 @@
 package com.freestack.spring.Consultation;
 
+import com.freestack.spring.EntityManagerFactorySingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
 public class ConsultationService {
-
     @Autowired
     private ConsultationRepository consultationRepository;
 
     @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    private EntityManager em;
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("EntityManagerConsultation");
-    EntityManager em = emf.createEntityManager();
+    public ConsultationService() {
+        this.em = EntityManagerFactorySingleton.getInstance().createEntityManager();
+    }
 
-
-    public Consultation saveConsultation(ConsultationDTO consultationDTO){
+    public Consultation createConsultation(ConsultationDTO consultationDTO){
         if(verifSchedule(consultationDTO.getDate(), consultationDTO.getHour())){
+            Doctor docteur = em.find(Doctor.class, consultationDTO.getDoctor_id();
+            Patient patient = em.find(Patient.class, consultationDTO.getPatien_id());
 
+            
 
+            LocalDateTime date = LocalDateTime.parse(consultationDTO.getDate());
+            Consultation consultation = new Consultation(date, consultationDTO.getDoctor_id(), consultationDTO.doctor_id);
+
+            this.em.getTransaction().begin();
+            this.em.persist(consultation);
+            this.em.getTransaction().commit();
+            return consultation;
 
         }else{
             return null;
         }
     }
 
-
-    public Consultation getConsultation(int id){
-
-    }
 
 
     public boolean verifSchedule(String d, Integer h){

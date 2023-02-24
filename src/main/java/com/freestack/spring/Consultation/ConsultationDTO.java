@@ -2,7 +2,7 @@ package com.freestack.spring.Consultation;
 
 public class ConsultationDTO {
     Long doctor_id;
-    Long pat;
+    Long patien_id;
     String date;
     Integer hour;
 
@@ -14,12 +14,12 @@ public class ConsultationDTO {
         this.doctor_id = doctor_id;
     }
 
-    public Long getPat() {
-        return pat;
+    public Long getPatien_id() {
+        return patien_id;
     }
 
-    public void setPat(Long pat) {
-        this.pat = pat;
+    public void setPatien_id(Long patien_id) {
+        this.patien_id = patien_id;
     }
 
     public String getDate() {

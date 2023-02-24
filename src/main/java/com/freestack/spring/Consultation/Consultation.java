@@ -15,8 +15,13 @@ public class Consultation {
 
     LocalDateTime timeslot;
 
+    Long doctor_id;
 
+    Long patient_id;
 
-
-
+    public Consultation(LocalDateTime timeslot, Long doctor_id, Long patient_id) {
+        this.timeslot = timeslot;
+        this.doctor_id = doctor_id;
+        this.patient_id = patient_id;
+    }
 }
