@@ -1,27 +1,52 @@
 package com.freestack.spring.Consultation;
 
+import com.freestack.spring.Doctor.Doctor;
+import com.freestack.spring.Patients.Patient;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Repository
+@Entity
+@IdClass(ConsultationId.class)
 public class Consultation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
 
+    @Id
     LocalDateTime timeslot;
 
-    Long doctor_id;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    Doctor doctor;
 
-    Long patient_id;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    Patient patient_id;
 
-    public Consultation(LocalDateTime timeslot, Long doctor_id, Long patient_id) {
+
+
+    public LocalDateTime getTimeslot() {
+        return timeslot;
+    }
+
+    public void setTimeslot(LocalDateTime timeslot) {
         this.timeslot = timeslot;
-        this.doctor_id = doctor_id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(Patient patient_id) {
         this.patient_id = patient_id;
     }
 }

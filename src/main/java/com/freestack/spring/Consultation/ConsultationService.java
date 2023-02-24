@@ -1,6 +1,8 @@
 package com.freestack.spring.Consultation;
 
+import com.freestack.spring.Doctor.Doctor;
 import com.freestack.spring.EntityManagerFactorySingleton;
+import com.freestack.spring.Patients.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +28,24 @@ public class ConsultationService {
 
     public Consultation createConsultation(ConsultationDTO consultationDTO){
         if(verifSchedule(consultationDTO.getDate(), consultationDTO.getHour())){
-            Doctor docteur = em.find(Doctor.class, consultationDTO.getDoctor_id();
-            Patient patient = em.find(Patient.class, consultationDTO.getPatien_id());
-
-            
-
-            LocalDateTime date = LocalDateTime.parse(consultationDTO.getDate());
-            Consultation consultation = new Consultation(date, consultationDTO.getDoctor_id(), consultationDTO.doctor_id);
-
             this.em.getTransaction().begin();
+
+
+            Doctor doctor = em.find(Doctor.class, consultationDTO.getDoctor_id());
+            Patient patient = em.find(Patient.class, consultationDTO.getPatient_id());
+
+
+
+            LocalDate date = LocalDate.parse(consultationDTO.getDate());
+            LocalDateTime datetime = date.atTime(consultationDTO.getHour(),0);
+
+            Consultation consultation = new Consultation();
+            consultation.setDoctor(doctor);
+            consultation.setPatient_id(patient);
+            consultation.setTimeslot(datetime);
+
+
+
             this.em.persist(consultation);
             this.em.getTransaction().commit();
             return consultation;

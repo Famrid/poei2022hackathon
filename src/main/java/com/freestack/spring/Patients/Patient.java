@@ -1,9 +1,11 @@
 package com.freestack.spring.Patients;
 
+import com.freestack.spring.Consultation.Consultation;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "patient")
@@ -17,6 +19,9 @@ public class Patient {
 
     @Column(name = "lastname", nullable = false)
     private String lastname;
+
+    @OneToMany(mappedBy = "patient")
+    List<Consultation> consultations;
 
     public long getId() {
         return id;
