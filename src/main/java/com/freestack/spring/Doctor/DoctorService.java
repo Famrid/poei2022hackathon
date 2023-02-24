@@ -1,28 +1,23 @@
 package com.freestack.spring.Doctor;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import com.freestack.spring.EntityManagerFactorySingleton;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+
+@Service
 public class DoctorService {
+    private EntityManager em;
 
-    private List<Doctor> doctors = new ArrayList<>();
-    private int nextId = 1;
-
-    public List<Doctor> getAllDoctors() {
-        return doctors;
-    }
-
-    public Doctor getDoctorById(int id) {
-        for (Doctor doctor : doctors) {
-            if (doctor.getId() == id) {
-                return doctor;
-            }
-        }
-        return null;
+    public DoctorService() {
+        this.em = EntityManagerFactorySingleton.getInstance().createEntityManager();
     }
 
     public Doctor createDoctor(Doctor doctor) {
-        doctor.setId(nextId++);
-        doctors.add(doctor);
+        this.em.getTransaction().begin();
+        this.em.persist(doctor);
+        this.em.getTransaction().commit();
         return doctor;
-    }}
+    }
+}
