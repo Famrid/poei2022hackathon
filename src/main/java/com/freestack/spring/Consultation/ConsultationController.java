@@ -17,7 +17,8 @@ public class ConsultationController  {
     }
 
     @PostMapping
-    public void addConsultation(@RequestBody Consultation consultation){
+    public void addConsultation(@RequestBody ConsultationDTO consultationDTO){
+
 
 
 

@@ -21,9 +21,23 @@ public class ConsultationService {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("EntityManagerConsultation");
     EntityManager em = emf.createEntityManager();
-    public Consultation saveConsultation(Consultation consultation){
-        
+
+
+    public Consultation saveConsultation(ConsultationDTO consultationDTO){
+        if(verifSchedule(consultationDTO.getDate(), consultationDTO.getHour())){
+
+
+
+        }else{
+            return null;
+        }
     }
+
+
+    public Consultation getConsultation(int id){
+
+    }
+
 
     public boolean verifSchedule(String d, Integer h){
         LocalDate date = LocalDate.parse(d);
