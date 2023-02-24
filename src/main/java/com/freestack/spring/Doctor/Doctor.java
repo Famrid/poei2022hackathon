@@ -1,6 +1,13 @@
 package com.freestack.spring.Doctor;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "doctor")
 public class Doctor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public int getId() {
@@ -27,12 +34,10 @@ public class Doctor {
         this.lastname = lastname;
     }
 
+    @Column(name = "firstname", nullable = false)
     private String firstname;
+    @Column(name = "lastname", nullable = false)
     private String lastname;
 
-    public Doctor(int id, String firstname, String lastname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
+
 }
